@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "lRMZq+if0cj5m556MM41mQqfEE0qOPIvDta3xDbBTu0=",
+  "Source": "inflation-data-server",
+  "BasePath": "_content/inflation-data-server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
