@@ -1,6 +1,6 @@
 ﻿using InflationDataServer.Models;
+using InflationDataServer.Models.Responses;
 using InflationDataServer.Persistence;
-using InflationDataServer.ViewModels;
 
 namespace InflationDataServer.Services
 {
@@ -18,7 +18,7 @@ namespace InflationDataServer.Services
             -3: Inflation is null
             -4: Inflation updating failed
          */
-        public async Task<InflationResponse> createInflation(Inflation? inflation)
+        public async Task<Inflation?> createInflation(Inflation? inflation)
         {
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
             InflationResponse response = new InflationResponse();
@@ -29,81 +29,64 @@ namespace InflationDataServer.Services
                 {
                     // Perfrom operation
                     unitOfWork.connect();
-                    Inflation inf = await unitOfWork.createInflation(inflation);
+                    Inflation inf = await unitOfWork.CreateInflation(inflation);
                     unitOfWork.disconnect();
-
-                    // Build response
-                    response.inflationList.Add(inf);
-                    response.message.message = Helpers.StandardMessages[1]; // Succeeded
-                    response.message.id = 1;
+                    return inf;
                 }
                 else
                 {
-                    response.message.id = -3;
-                    response.message.message = Helpers.StandardMessages[-3]; // Inflation is null
+                    return null;
                 }
             }
             catch(Exception ex)
             {
-                response.message.id = -1;
-                response.message.message = Helpers.StandardMessages[-1];
+                return null;
             }
-            return response;
         }
 
-        public async Task<InflationResponse> readInflation(DateTime? startDate, DateTime? endDate)
+        public async Task<List<Inflation>> readInflation(DateTime? startDate, DateTime? endDate)
         {
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
-            InflationResponse response = new InflationResponse();
+            List<Inflation> inflations = new List<Inflation>();
 
-            try
+            // Select option read
+            if (startDate == null)
             {
-                // Select option read
-                if (startDate == null)
+                if (endDate == null )
                 {
-                    if (endDate == null)
-                    {
-                        // Read a year of data
-                        unitOfWork.connect();
-                        response.inflationList = await unitOfWork.readAllInflation();
-                        unitOfWork.disconnect();
-                    }else
-                    {
-                        // Read until end date
-                        unitOfWork.connect();
-                        response.inflationList = await unitOfWork.readUntilDateInflation(endDate.Value);
-                        unitOfWork.disconnect();
-                    }
+                    // Read a year of data
+                    unitOfWork.connect();
+                    inflations = await unitOfWork.ReadAllInflation();
+                    unitOfWork.disconnect();
+                }else
+                {
+                    // Read until end date
+                    unitOfWork.connect();
+                    inflations = await unitOfWork.ReadUntilDateInflation(endDate.Value);
+                    unitOfWork.disconnect();
                 }
-                else
+            }
+            else
+            {
+                if (endDate == null)
                 {
-                    if (endDate == null)
-                    {
-                        // Read a year of data
-                        unitOfWork.connect();
-                        response.inflationList = await unitOfWork.readFromDateInflation(startDate.Value);
-                        unitOfWork.disconnect();
+                    // Read a year of data
+                    unitOfWork.connect();
+                    inflations = await unitOfWork.ReadFromDateInflation(startDate.Value);
+                    unitOfWork.disconnect();
 
-                    }else
-                    {
-                        // Read interval
-                        unitOfWork.connect();
-                        response.inflationList = await unitOfWork.readIntervalInflation(startDate.Value, endDate.Value);
-                        unitOfWork.disconnect();
-                    }    
-                }
-                response.message.message = Helpers.StandardMessages[1];
-                response.message.id = 1;
+                }else
+                {
+                    // Read interval
+                    unitOfWork.connect();
+                    inflations = await unitOfWork.ReadIntervalInflation(startDate.Value, endDate.Value);
+                    unitOfWork.disconnect();
+                }    
             }
-            catch (Exception ex)
-            {
-                response.message.id = -1;
-                response.message.message = Helpers.StandardMessages[-1];
-            }
-            return response;
+            return inflations;
         }
 
-        public async Task<InflationResponse> updateInflation(Inflation? inflation)
+        public async Task<bool> updateInflation(Inflation? inflation)
         {
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
             InflationResponse response = new InflationResponse();
@@ -114,36 +97,23 @@ namespace InflationDataServer.Services
                 {
                     // Perfrom operation
                     unitOfWork.connect();
-                    bool result = await unitOfWork.updateInflation(inflation);
+                    bool result = await unitOfWork.UpdateInflation(inflation);
                     unitOfWork.disconnect();
-                    if (result)
-                    {
-                        // Build response
-                        response.inflationList.Add(inflation);
-                        response.message.message = Helpers.StandardMessages[1]; // Succeeded
-                        response.message.id = 1;
-                    }else
-                    {
-                        response.message.id = -4;
-                        response.message.message = Helpers.StandardMessages[-4]; // Inflation updating failed
-                    }
+
+                    return result;
                 }
                 else
                 {
-                    response.message.id = -3;
-                    response.message.message = Helpers.StandardMessages[-3]; // Inflation is null
+                    return false;
                 }
             }
             catch (Exception ex)
             {
-                response.message.id = -1;
-                response.message.message = Helpers.StandardMessages[-1];
+                return false;
             }
-            return response;
         }
 
-
-        public async Task<InflationResponse> deleteInflation(Inflation? inflation)
+        public async Task<bool> deleteInflation(Inflation? inflation)
         {
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
             InflationResponse response = new InflationResponse();
@@ -154,33 +124,19 @@ namespace InflationDataServer.Services
                 {
                     // Perfrom operation
                     unitOfWork.connect();
-                    bool result = await unitOfWork.deleteInflation(inflation);
+                    bool result = await unitOfWork.DeleteInflation(inflation);
                     unitOfWork.disconnect();
-                    if (result)
-                    {
-                        // Build response
-                        response.inflationList.Add(inflation);
-                        response.message.message = Helpers.StandardMessages[1]; // Succeeded
-                        response.message.id = 1;
-                    }
-                    else
-                    {
-                        response.message.id = -4;
-                        response.message.message = Helpers.StandardMessages[-5]; // Inflation deletion failed
-                    }
+                    return result;
                 }
                 else
                 {
-                    response.message.id = -3;
-                    response.message.message = Helpers.StandardMessages[-3]; // Inflation is null
+                    return false;
                 }
             }
             catch (Exception ex)
             {
-                response.message.id = -1;
-                response.message.message = Helpers.StandardMessages[-1];
+                return false;
             }
-            return response;
         }
     }
 }

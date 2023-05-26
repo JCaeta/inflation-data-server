@@ -35,6 +35,8 @@
                     .AllowAnyMethod();
             });
         });
+
+        //services.AddAuthentication(JwtBearerDefaults)
     }
 
     public static void Configure(WebApplication app)

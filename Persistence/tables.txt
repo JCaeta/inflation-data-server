@@ -3,3 +3,11 @@ CREATE TABLE inflation (
 	date DATE NOT NULL,
 	value DECIMAL(10,4) NOT NULL
 );
+
+CREATE TABLE Admins (
+	id bigserial not null primary key,
+	username text,
+	password text
+);
+
+INSERT INTO Admins(id, username, password) values(0, 'admin', 'admin');
