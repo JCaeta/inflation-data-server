@@ -85,7 +85,6 @@ namespace InflationDataServer.Persistence
             UpdateOne<Inflation> strategy = new UpdateOne<Inflation>();
             strategy.item = inflation;
             return await inflationRepository.Update(strategy);
-            //return await inflationRepository.Update(inflation);
         }
 
         public async Task<bool> DeleteInflation(Inflation inflation)
@@ -103,7 +102,8 @@ namespace InflationDataServer.Persistence
         public async Task<bool> ExistsAdmin(Admin admin)
         {
             AdminRepository<Admin> adminRepository = new AdminRepository<Admin>(this.connection);
-            IReadStrategy<Admin> strategy = new ReadOne<Admin>();
+            ReadOne<Admin> strategy = new ReadOne<Admin>();
+            strategy.admin = admin;
             List<Admin> result = await adminRepository.Read(strategy);
             if(result.Count > 0) { return true; }
             return false;
@@ -112,7 +112,7 @@ namespace InflationDataServer.Persistence
         public async Task<bool> UpdateAdminPassword(Admin admin)
         {
             AdminRepository<Admin> adminRepository = new AdminRepository<Admin>(this.connection);
-            UpdatePassword<Admin> strategy = new UpdatePassword<Admin>();
+            UpdateUsername<Admin> strategy = new UpdateUsername<Admin>();
             strategy.item = admin;
             return await adminRepository.Update(strategy);
         }

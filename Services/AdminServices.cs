@@ -8,10 +8,6 @@ namespace InflationDataServer.Services
     {
         public async Task<bool> SignIn(string username, string password)
         {
-            Admin admin = new Admin();
-            admin.username = "admin";
-            admin.password = "admin";
-
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
             unitOfWork.connect();   
             bool result = await unitOfWork.SignInAdmin(username, password);
@@ -32,18 +28,45 @@ namespace InflationDataServer.Services
 
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
             unitOfWork.connect();
-            if (await unitOfWork.ExistsAdmin(admin))
-            {
+            //if (await unitOfWork.ExistsAdmin(admin))
+            //{
                 admin.password = newPassword;
                 bool result = await unitOfWork.UpdateAdminPassword(admin);
                 unitOfWork.disconnect();
                 return result;
-            }
-            else
-            {
-                unitOfWork.disconnect();
-                return false;
-            }
+            //}
+            //else
+            //{
+            //    unitOfWork.disconnect();
+            //    return false;
+            //}
         }
+
+        public async Task<bool> ValidatePassword(string username, string password)
+        {
+            Admin admin = new Admin();
+            admin.username = username;
+            admin.password = password;
+
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            unitOfWork.connect();
+            bool result = await unitOfWork.ExistsAdmin(admin);
+            unitOfWork.disconnect();
+            return result;
+        }
+
+        public async Task<bool> ChangeUsername(string newUsername, string password)
+        {
+            Admin admin = new Admin();
+            admin.username = newUsername;
+            admin.password = password;
+
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            unitOfWork.connect();
+            bool result = await unitOfWork.UpdateAdminPassword(admin);
+            unitOfWork.disconnect();
+            return result;
+        }
+
     }
 }

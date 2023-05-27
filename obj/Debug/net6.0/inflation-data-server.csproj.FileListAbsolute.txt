@@ -1,10 +1,3 @@
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.csproj.AssemblyReference.cache
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.GeneratedMSBuildEditorConfig.editorconfig
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.AssemblyInfoInputs.cache
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.AssemblyInfo.cs
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.csproj.CoreCompileInputs.cache
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.MvcApplicationPartsAssemblyInfo.cs
-D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.MvcApplicationPartsAssemblyInfo.cache
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\appsettings.Development.json
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\appsettings.json
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\inflation-data-server.exe
@@ -43,6 +36,13 @@ D:\documents storage\repositories\financials\market-tools\inflation-data\inflati
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\System.Text.Json.dll
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.csproj.AssemblyReference.cache
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.GeneratedMSBuildEditorConfig.editorconfig
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.AssemblyInfoInputs.cache
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.AssemblyInfo.cs
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.csproj.CoreCompileInputs.cache
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.MvcApplicationPartsAssemblyInfo.cs
+D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\inflation-data-server.MvcApplicationPartsAssemblyInfo.cache
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\staticwebassets\msbuild.inflation-data-server.Microsoft.AspNetCore.StaticWebAssets.props
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\staticwebassets\msbuild.build.inflation-data-server.props
 D:\documents storage\repositories\financials\market-tools\inflation-data\inflation-data-server\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.inflation-data-server.props

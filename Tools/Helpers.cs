@@ -10,7 +10,8 @@
             {-3,  "Inflation is null"},
             {-4,  "Inflation updating failed"},
             {-5, "Inflation deletion failed" },
-            {-6, "Access Denied: Invalid or expired token" }
+            {-6, "Access Denied: Invalid or expired token" },
+            {-7, "Invalid password" }
         };
     }
 }
@@ -25,4 +26,5 @@
     -4: Inflation updating failed
     -5: Inflation deletion failed
     -6: Access Denied: Invalid or expired token
+    -7: Invalid password
  */

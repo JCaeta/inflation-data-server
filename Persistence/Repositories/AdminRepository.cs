@@ -28,7 +28,7 @@ namespace InflationDataServer.Persistence.Repositories
 
         public async Task<List<Admin>> Read(IReadStrategy<Admin> strategy)
         {
-            throw new NotImplementedException();
+            return await strategy.Read(connection);
         }
 
         public async Task<bool> Update(IUpdateStrategy<Admin> strategy)
@@ -40,7 +40,7 @@ namespace InflationDataServer.Persistence.Repositories
         public async Task<bool> SignIn(string username, string password)
         {
             // 1) Execute query
-            string query = "SELECT EXISTS(SELECT 1 FROM Admins WHERE username = @username AND @password = 'admin');";
+            string query = "SELECT EXISTS(SELECT 1 FROM Admins WHERE username = @username AND password = @password);";
 
 
             NpgsqlDataReader result;
@@ -56,7 +56,7 @@ namespace InflationDataServer.Persistence.Repositories
                 // 2) Extract data
                 while (result.Read())
                 {
-                    return result.GetBoolean(1);
+                    return result.GetBoolean(0);
                 }
                 return false;
             }

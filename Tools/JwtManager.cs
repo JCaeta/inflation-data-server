@@ -56,7 +56,7 @@ namespace InflationDataServer.Tools
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, subject),
-                new Claim(JwtRegisteredClaimNames.UniqueName, "admin"),
+                new Claim(JwtRegisteredClaimNames.UniqueName, username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

@@ -14,7 +14,7 @@ namespace InflationDataServer.Persistence.Repositories.ReadAdminStrategies
             List<Admin> admins = new List<Admin>();
 
             // 1) Execute query
-            string query = "SELECT * FROM Admins WHERE username = @username AND @password = 'admin');";
+            string query = "SELECT * FROM Admins WHERE username = @username AND password = @password;";
 
             NpgsqlDataReader result;
             using (NpgsqlCommand executor = new NpgsqlCommand(query, connection))
