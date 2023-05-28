@@ -1,6 +1,6 @@
 ﻿public class Startup
 {
-    private static readonly string _MyCors = "";
+    //private static readonly string _MyCors = "";
 
     public static WebApplication InitializeApp(string[] args)
     {

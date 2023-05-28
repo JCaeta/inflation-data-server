@@ -18,6 +18,7 @@ namespace InflationDataServer.Persistence
         {
             connectionString =
                 "Server = " + databaseInformation["SERVER"] +
+                "; Port = " + databaseInformation["PORT"] +
                 "; User Id = " + databaseInformation["USER_ID"] +
                 "; Password = " + databaseInformation["PASSWORD"] +
                 "; Database = " + databaseInformation["DATABASE_NAME"];
