@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\inflation-data-server.props" />
+</Project>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gMoXMZ9ULUyPLMIe0ihmlaileS02vhIGvPEayFyNJuLDldyiKKg6xv+zjalV+5tDrRtPOZGLTPWNmBdHo10jew==",
+  "dgSpecHash": "CZEhI006ptBJNpq7nJKQ+yKIHx6IkOLDMVjhrhqIhiGXu5OfKeVNu+z/NkZgTIGpL7gnjYTXxLRH0Iuq/rwtVA==",
   "success": true,
   "projectFilePath": "D:\\documents storage\\repositories\\financials\\market-tools\\inflation-data\\inflation-data-server\\inflation-data-server.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\joaqu\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\joaqu\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\joaqu\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\joaqu\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\joaqu\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\joaqu\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\joaqu\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
