@@ -20,7 +20,7 @@ namespace InflationDataServer.Services
          */
         public async Task<Inflation?> createInflation(Inflation? inflation)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             InflationResponse response = new InflationResponse();
             try
             {
@@ -46,7 +46,7 @@ namespace InflationDataServer.Services
 
         public async Task<List<Inflation>> readInflation(DateTime? startDate, DateTime? endDate)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             List<Inflation> inflations = new List<Inflation>();
 
             // Select option read
@@ -88,7 +88,7 @@ namespace InflationDataServer.Services
 
         public async Task<bool> updateInflation(Inflation? inflation)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             InflationResponse response = new InflationResponse();
             try
             {
@@ -115,7 +115,7 @@ namespace InflationDataServer.Services
 
         public async Task<bool> deleteInflation(Inflation? inflation)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             InflationResponse response = new InflationResponse();
             try
             {

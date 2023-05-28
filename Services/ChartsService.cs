@@ -7,7 +7,7 @@ namespace InflationDataServer.Services
     {
         public async Task<ChartsData> readChartsData(DateTime? startDate, DateTime? endDate)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             ChartsData chartsData = new ChartsData();
             InflationService inflationService = new InflationService();
             List<Inflation> inflations = await inflationService.readInflation(startDate, endDate);
@@ -56,42 +56,5 @@ namespace InflationDataServer.Services
             }
             return lineChartData;
         }
-
-
-
-
-
-
-        //public async Task<BarChartData> setupBarChartData(List<Inflation> inflations)
-        //{
-        //    BarChartData barChartData = new BarChartData();
-        //    float cumulativeInflation = 0;
-
-        //    for (int i = inflations.Count - 1; i >= 0; i--)
-        //    {
-        //        Inflation inflation = inflations[i];
-        //        cumulativeInflation += inflation.Value;
-        //        cumulativeInflation = (float)Math.Round(cumulativeInflation, 2);
-        //        barChartData.data.Add(cumulativeInflation);
-        //        barChartData.labels.Add(inflation.Date.ToString("MMM-yyyy"));
-        //    }
-        //    return barChartData;
-        //}
-
-        //public async Task<LineChartData> setupLineChartData(List<Inflation> inflations)
-        //{
-        //    LineChartData lineChartData = new LineChartData();
-
-        //    for (int i = inflations.Count - 1; i >= 0; i--)
-        //    {
-        //        Inflation inflation = inflations[i];
-        //        LineChartPoint lineChartPoint = new LineChartPoint();
-        //        lineChartPoint.time = inflation.Date.ToShortDateString();
-        //        lineChartPoint.value = inflation.Value;
-
-        //        lineChartData.data.Add(lineChartPoint);
-        //    }
-        //    return lineChartData;
-        //}
     }
 }

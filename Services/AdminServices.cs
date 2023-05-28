@@ -8,7 +8,7 @@ namespace InflationDataServer.Services
     {
         public async Task<bool> SignIn(string username, string password)
         {
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();   
             bool result = await unitOfWork.SignInAdmin(username, password);
             unitOfWork.disconnect();
@@ -26,20 +26,12 @@ namespace InflationDataServer.Services
             admin.username = username;
             admin.password = oldPassword;
 
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();
-            //if (await unitOfWork.ExistsAdmin(admin))
-            //{
-                admin.password = newPassword;
-                bool result = await unitOfWork.UpdateAdminPassword(admin);
-                unitOfWork.disconnect();
-                return result;
-            //}
-            //else
-            //{
-            //    unitOfWork.disconnect();
-            //    return false;
-            //}
+            admin.password = newPassword;
+            bool result = await unitOfWork.UpdateAdminPassword(admin);
+            unitOfWork.disconnect();
+            return result;
         }
 
         public async Task<bool> ValidatePassword(string username, string password)
@@ -48,7 +40,7 @@ namespace InflationDataServer.Services
             admin.username = username;
             admin.password = password;
 
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();
             bool result = await unitOfWork.ExistsAdmin(admin);
             unitOfWork.disconnect();
@@ -61,7 +53,7 @@ namespace InflationDataServer.Services
             admin.username = newUsername;
             admin.password = password;
 
-            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.Information);
+            PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();
             bool result = await unitOfWork.UpdateAdminPassword(admin);
             unitOfWork.disconnect();

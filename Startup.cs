@@ -16,7 +16,6 @@
         Configure(app);
 
         return app;
-
     }
 
     public static IConfiguration Configuration { get; }
@@ -29,17 +28,18 @@
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP .Net API template", Version = "v1" });
         });
 
+        string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
+
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
             {
-                builder.WithOrigins("http://localhost:3000")
+                //builder.WithOrigins("http://localhost:3000")
+                builder.WithOrigins(origin)
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
         });
-
-        //services.AddAuthentication(JwtBearerDefaults)
     }
 
     public static void Configure(WebApplication app)
