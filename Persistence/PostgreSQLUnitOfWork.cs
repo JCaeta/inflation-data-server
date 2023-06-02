@@ -29,7 +29,7 @@ namespace InflationDataServer.Persistence
 
         public  void connect()
         {
-            connection = new NpgsqlConnection();
+            connection = new NpgsqlConnection(connectionString);
             connection.Open();
         }
 
