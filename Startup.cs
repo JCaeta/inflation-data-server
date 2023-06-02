@@ -1,4 +1,6 @@
-﻿public class Startup
+﻿using Microsoft.AspNetCore.Mvc;
+
+public class Startup
 {
     //private static readonly string _MyCors = "";
 
@@ -40,13 +42,15 @@
                     .AllowAnyMethod();
             });
         });
+        
     }
 
     public static void Configure(WebApplication app)
     {
         // Configure the HTTP request pipeline.
 
-        app.UseCors();
+        app.UseCors("ApiCorsPolicy");
+        //app.UseMvc();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
