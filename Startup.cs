@@ -40,18 +40,19 @@ public class Startup
             //        .AllowAnyHeader()
             //        .AllowAnyMethod();
             //});
-            options.AddPolicy(name: "_myAllowSpecificOrigins", 
-                policy =>
+            options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
             {
-                policy.WithOrigins(origin)
+                builder.SetIsOriginAllowed(o => new Uri(o).Host == origin)
                     .AllowAnyHeader()
                     .AllowAnyMethod();
+
+
+
+                //builder.WithOrigins(origin)
+                //    .AllowAnyHeader()
+                //    .AllowAnyMethod();
             });
-
-
-
         });
-        
     }
 
     public static void Configure(WebApplication app)
