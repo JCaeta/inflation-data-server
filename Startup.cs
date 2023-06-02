@@ -30,37 +30,35 @@ public class Startup
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP .Net API template", Version = "v1" });
         });
 
-        string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
-        Console.WriteLine("origin: " + origin);
-        services.AddCors(options =>
-        {
-            //options.AddDefaultPolicy(builder =>
-            //{
-            //    builder.WithOrigins(origin)
-            //        .AllowAnyHeader()
-            //        .AllowAnyMethod();
-            //});
-            options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
-            {
-                //builder.SetIsOriginAllowed(o => new Uri(o).Host == origin)
-                //    .AllowAnyHeader()
-                //    .AllowAnyMethod();
+        //string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
+        //Console.WriteLine("origin: " + origin);
+        //services.AddCors(options =>
+        //{
 
+        //    options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
+        //    {
 
-
-                builder.WithOrigins(origin)
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    .AllowAnyMethod();
-            });
-        });
+        //        builder.WithOrigins(origin)
+        //            .AllowAnyHeader()
+        //            .AllowCredentials()
+        //            .AllowAnyMethod();
+        //    });
+        //});
     }
 
     public static void Configure(WebApplication app)
     {
         // Configure the HTTP request pipeline.
 
-        app.UseCors("_myAllowSpecificOrigins");
+        //app.UseCors("_myAllowSpecificOrigins");
+
+
+        string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
+        app.UseCors(
+          options => options.WithOrigins(origin).AllowAnyMethod().AllowAnyHeader()
+              );
+
+
         //app.UseMvc();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
