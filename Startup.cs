@@ -42,15 +42,16 @@ public class Startup
             //});
             options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
             {
-                builder.SetIsOriginAllowed(o => new Uri(o).Host == origin)
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-
-
-
-                //builder.WithOrigins(origin)
+                //builder.SetIsOriginAllowed(o => new Uri(o).Host == origin)
                 //    .AllowAnyHeader()
                 //    .AllowAnyMethod();
+
+
+
+                builder.WithOrigins(origin)
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .AllowAnyMethod();
             });
         });
     }
