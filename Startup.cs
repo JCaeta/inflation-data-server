@@ -29,7 +29,7 @@
         });
 
         string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
-
+        Console.WriteLine("origin: " + origin);
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
