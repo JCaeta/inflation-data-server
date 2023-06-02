@@ -34,13 +34,22 @@ public class Startup
         Console.WriteLine("origin: " + origin);
         services.AddCors(options =>
         {
-            options.AddDefaultPolicy(builder =>
+            //options.AddDefaultPolicy(builder =>
+            //{
+            //    builder.WithOrigins(origin)
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod();
+            //});
+            options.AddPolicy(name: "_myAllowSpecificOrigins", 
+                policy =>
             {
-                //builder.WithOrigins("http://localhost:3000")
-                builder.WithOrigins(origin)
+                policy.WithOrigins(origin)
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
+
+
+
         });
         
     }
@@ -49,7 +58,7 @@ public class Startup
     {
         // Configure the HTTP request pipeline.
 
-        app.UseCors("ApiCorsPolicy");
+        app.UseCors("_myAllowSpecificOrigins");
         //app.UseMvc();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
