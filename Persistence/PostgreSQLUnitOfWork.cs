@@ -23,6 +23,8 @@ namespace InflationDataServer.Persistence
                 ";User Id=" + databaseInformation["USER_ID"] +
                 ";Password=" + databaseInformation["PASSWORD"] +
                 ";Database=" + databaseInformation["DATABASE_NAME"];
+
+            Console.WriteLine(connectionString);
         }
 
         public  void connect()
