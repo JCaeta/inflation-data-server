@@ -32,18 +32,18 @@ public class Startup
 
         //string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
         //Console.WriteLine("origin: " + origin);
-        services.AddCors(options =>
-        {
+        //services.AddCors(options =>
+        //{
 
-            options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
-            {
+        //    options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
+        //    {
 
-                builder.WithOrigins("https://inflation-data-e2924.web.app")
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    .AllowAnyMethod();
-            });
-        });
+        //        builder.WithOrigins("https://inflation-data-e2924.web.app")
+        //            .AllowAnyHeader()
+        //            .AllowCredentials()
+        //            .AllowAnyMethod();
+        //    });
+        //});
     }
 
     public static void Configure(WebApplication app)
@@ -57,7 +57,16 @@ public class Startup
         //app.UseCors(
         //  options => options.WithOrigins(origin).AllowAnyMethod().AllowAnyHeader()
         //      );
-        app.UseCors("_myAllowSpecificOrigins");
+        //app.UseCors("_myAllowSpecificOrigins");
+        string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
+
+        // global cors policy
+        app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin 
+            .AllowCredentials());
+
 
         //app.UseMvc();
         app.UseRouting();
