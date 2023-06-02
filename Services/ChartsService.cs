@@ -7,6 +7,7 @@ namespace InflationDataServer.Services
     {
         public async Task<ChartsData> readChartsData(DateTime? startDate, DateTime? endDate)
         {
+            Console.WriteLine("readChartsData");
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             ChartsData chartsData = new ChartsData();
             InflationService inflationService = new InflationService();
