@@ -16,20 +16,18 @@ namespace InflationDataServer.Persistence
 
         public PostgreSQLUnitOfWork(Dictionary<string, string> databaseInformation)
         {
-            connectionString =
-                "Server = " + databaseInformation["SERVER"] +
-                "; Port = " + databaseInformation["PORT"] +
-                "; User Id = " + databaseInformation["USER_ID"] +
-                "; Password = " + databaseInformation["PASSWORD"] +
-                "; Database = " + databaseInformation["DATABASE_NAME"];
 
-            Console.WriteLine("connectionString: " + connectionString);
-            Console.WriteLine(" ");
+            connectionString =
+                "Server=" + databaseInformation["SERVER"] +
+                ";Port=" + databaseInformation["PORT"] +
+                ";User Id=" + databaseInformation["USER_ID"] +
+                ";Password=" + databaseInformation["PASSWORD"] +
+                ";Database=" + databaseInformation["DATABASE_NAME"];
         }
 
         public  void connect()
         {
-            connection = new NpgsqlConnection(connectionString);
+            connection = new NpgsqlConnection();
             connection.Open();
         }
 

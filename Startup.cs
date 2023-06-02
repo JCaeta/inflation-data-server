@@ -10,7 +10,7 @@
         ConfigureServices(services);
 
         var port = Environment.GetEnvironmentVariable("PORT") ?? "5001";
-        builder.WebHost.UseUrls($"http://*:{port}");
+        builder.WebHost.UseUrls($"https://*:{port}");
 
         WebApplication app = builder.Build();
         Configure(app);
