@@ -27,13 +27,10 @@ namespace InflationDataServer.Controllers
         [HttpPost("create", Name = "CreateInflation")]
         public async Task<InflationResponse> Create([FromBody]InflationRequest request)
         {
-            Console.WriteLine("Create inflation");
-            Console.WriteLine(request);
             InflationService inflationService = new InflationService();
             InflationResponse response = new InflationResponse();
             JwtManager jwtManager = new JwtManager(_configuration);
             if(request.token != null && jwtManager.ValidateJwtToken(request.token)) {
-                Console.WriteLine("Token validated");
                 Inflation? inflation = await inflationService.createInflation(request.inflation);
                 if(inflation != null)
                 {
@@ -49,7 +46,6 @@ namespace InflationDataServer.Controllers
                 string username = jwtManager.GetUsernameInToken(request.token);
                 string newToken = jwtManager.GenerateJwtToken(username);
                 response.token = newToken;
-                Console.WriteLine(response);
                 return response;
 
             } else
@@ -57,7 +53,6 @@ namespace InflationDataServer.Controllers
                 response.message.id = -6; //Access Denied: Invalid or expired token
                 response.message.message = Helpers.StandardMessages[-6];
                 response.token = null;
-                Console.WriteLine(response);
                 return response;
             }
         }

@@ -19,6 +19,7 @@ namespace InflationDataServer.Persistence.Repositories
         {
             string query = "insert into inflation(date, value) values(@date, @value) returning id;";
             Console.WriteLine(query);
+            Console.WriteLine("date: " + item.date);
             NpgsqlCommand executor = new NpgsqlCommand(query, this.connection);
             executor.Parameters.AddWithValue("@date", item.date);
             executor.Parameters.AddWithValue("@value", item.value);
