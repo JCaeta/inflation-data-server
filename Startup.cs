@@ -12,7 +12,8 @@ public class Startup
         ConfigureServices(services);
 
         var port = Environment.GetEnvironmentVariable("PORT") ?? "5001";
-        builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+        var host = Environment.GetEnvironmentVariable("HOST") ?? $"http://127.0.0.1:";
+        builder.WebHost.UseUrls($"{host}{port}");
 
         WebApplication app = builder.Build();
         Configure(app);
@@ -29,21 +30,6 @@ public class Startup
         {
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP .Net API template", Version = "v1" });
         });
-
-        //var secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "secretkey";
-        //var audience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience";
-        //var issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
-        //var subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
-
-        //Console.WriteLine("secretKey: " + secretKey);
-        //Console.WriteLine("audience: " + audience);
-        //Console.WriteLine("issuer: " + issuer);
-        //Console.WriteLine("subject: " + subject);
-
-        //Configuration["JwtConfig:SecretKey"] = secretKey;
-        //Configuration["JwtConfig:Audience"] = audience;
-        //Configuration["JwtConfig:Issuer"] = issuer;
-        //Configuration["JwtConfig:Subject"] = subject;
     }
 
     public static void Configure(WebApplication app)

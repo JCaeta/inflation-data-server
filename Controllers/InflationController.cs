@@ -94,26 +94,27 @@ namespace InflationDataServer.Controllers
 
             if (request.token != null && jwtManager.ValidateJwtToken(request.token))
             {
+                string username = jwtManager.GetUsernameInToken(request.token);
+                string newToken = jwtManager.GenerateJwtToken(username);
                 if (await inflationService.updateInflation(request.inflation))
                 {
-                    string username = jwtManager.GetUsernameInToken(request.token);
-                    string newToken = jwtManager.GenerateJwtToken(username);
                     response.message.id = 1;
                     response.message.message = Helpers.StandardMessages[1];
                     response.token = newToken;
 
                 } else
                 {
+
                     response.message.id = -1;
                     response.message.message = Helpers.StandardMessages[-1];
-                    response.token = null;
+                    response.token = newToken;
                 }
                 return response;
             }
             else
             {
-                response.message.id = -5;
-                response.message.message = Helpers.StandardMessages[-5];
+                response.message.id = -6; //Access Denied: Invalid or expired token"
+                response.message.message = Helpers.StandardMessages[-6];
                 response.token = null;
                 return response;
             }
