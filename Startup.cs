@@ -20,7 +20,10 @@ public class Startup
         return app;
     }
 
-    public static IConfiguration Configuration { get; }
+    public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .Build();
 
     public static void ConfigureServices(IServiceCollection services)
     {
@@ -30,34 +33,19 @@ public class Startup
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP .Net API template", Version = "v1" });
         });
 
-        //string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
-        //Console.WriteLine("origin: " + origin);
-        //services.AddCors(options =>
-        //{
+        var secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "secretkey";
+        var audience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience";
+        var issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
+        var subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
 
-        //    options.AddPolicy(name: "_myAllowSpecificOrigins", builder =>
-        //    {
-
-        //        builder.WithOrigins("https://inflation-data-e2924.web.app")
-        //            .AllowAnyHeader()
-        //            .AllowCredentials()
-        //            .AllowAnyMethod();
-        //    });
-        //});
+        Configuration["JwtConfig:SecretKey"] = secretKey;
+        Configuration["JwtConfig:Audience"] = audience;
+        Configuration["JwtConfig:Issuer"] = issuer;
+        Configuration["JwtConfig:Subject"] = subject;
     }
 
     public static void Configure(WebApplication app)
     {
-        // Configure the HTTP request pipeline.
-
-        //app.UseCors("_myAllowSpecificOrigins");
-
-
-        //string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
-        //app.UseCors(
-        //  options => options.WithOrigins(origin).AllowAnyMethod().AllowAnyHeader()
-        //      );
-        //app.UseCors("_myAllowSpecificOrigins");
         string origin = Environment.GetEnvironmentVariable("ORIGIN") ?? "http://localhost:3000";
 
         // global cors policy
@@ -67,8 +55,6 @@ public class Startup
             .SetIsOriginAllowed(origin => true) // allow any origin 
             .AllowCredentials());
 
-
-        //app.UseMvc();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
