@@ -38,6 +38,11 @@ public class Startup
         var issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
         var subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
 
+        Console.WriteLine("secretKey: " + secretKey);
+        Console.WriteLine("audience: " + audience);
+        Console.WriteLine("issuer: " + issuer);
+        Console.WriteLine("subject: " + subject);
+
         Configuration["JwtConfig:SecretKey"] = secretKey;
         Configuration["JwtConfig:Audience"] = audience;
         Configuration["JwtConfig:Issuer"] = issuer;
