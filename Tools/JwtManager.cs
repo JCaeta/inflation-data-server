@@ -44,11 +44,18 @@ namespace InflationDataServer.Tools
 
         public string GenerateJwtToken(string username)
         {
-            string secretKey = _configuration.GetValue<string>("JwtConfig:SecretKey");
-            string issuer = _configuration.GetValue<string>("JwtConfig:Issuer");
-            string audience = _configuration.GetValue<string>("JwtConfig:Audience");
-            string subject = _configuration.GetValue<string>("JwtConfig:Subject");
+            //string secretKey = _configuration.GetValue<string>("JwtConfig:SecretKey");
+            //string issuer = _configuration.GetValue<string>("JwtConfig:Issuer");
+            //string audience = _configuration.GetValue<string>("JwtConfig:Audience");
+            //string subject = _configuration.GetValue<string>("JwtConfig:Subject");
             int expiryMinutes = _configuration.GetValue<int>("JwtConfig:ExpiryMinutes");
+
+            string secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "mySecretKey123";
+            string audience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience";
+            string issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
+            string subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
+
+
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -76,16 +83,21 @@ namespace InflationDataServer.Tools
         public string GetUsernameInToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            string secretKey = _configuration.GetValue<string>("JwtConfig:SecretKey");
+            string secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "mySecretKey123";
+            //string secretKey = _configuration.GetValue<string>("JwtConfig:SecretKey");
+
 
             var validationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = _configuration.GetValue<string>("JwtConfig:Issuer"),
-                ValidAudience = _configuration.GetValue<string>("JwtConfig:Audience"),
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                //ValidIssuer = _configuration.GetValue<string>("JwtConfig:Issuer"),
+                //ValidAudience = _configuration.GetValue<string>("JwtConfig:Audience"),
+                ValidIssuer = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience",
+                ValidAudience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience",
+
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
             };
 
             // Validate and decode the token

@@ -20,10 +20,7 @@ public class Startup
         return app;
     }
 
-    public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-        .Build();
+    public static IConfiguration Configuration { get; }
 
     public static void ConfigureServices(IServiceCollection services)
     {
@@ -33,20 +30,20 @@ public class Startup
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "ASP .Net API template", Version = "v1" });
         });
 
-        var secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "secretkey";
-        var audience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience";
-        var issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
-        var subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
+        //var secretKey = Environment.GetEnvironmentVariable("SECRET_KEY") ?? "secretkey";
+        //var audience = Environment.GetEnvironmentVariable("AUDIENCE") ?? "audience";
+        //var issuer = Environment.GetEnvironmentVariable("ISSUER") ?? "issuer";
+        //var subject = Environment.GetEnvironmentVariable("SUBJECT") ?? "subject";
 
-        Console.WriteLine("secretKey: " + secretKey);
-        Console.WriteLine("audience: " + audience);
-        Console.WriteLine("issuer: " + issuer);
-        Console.WriteLine("subject: " + subject);
+        //Console.WriteLine("secretKey: " + secretKey);
+        //Console.WriteLine("audience: " + audience);
+        //Console.WriteLine("issuer: " + issuer);
+        //Console.WriteLine("subject: " + subject);
 
-        Configuration["JwtConfig:SecretKey"] = secretKey;
-        Configuration["JwtConfig:Audience"] = audience;
-        Configuration["JwtConfig:Issuer"] = issuer;
-        Configuration["JwtConfig:Subject"] = subject;
+        //Configuration["JwtConfig:SecretKey"] = secretKey;
+        //Configuration["JwtConfig:Audience"] = audience;
+        //Configuration["JwtConfig:Issuer"] = issuer;
+        //Configuration["JwtConfig:Subject"] = subject;
     }
 
     public static void Configure(WebApplication app)
