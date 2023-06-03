@@ -38,6 +38,7 @@ namespace InflationDataServer.Persistence
 
         public async Task<Inflation> CreateInflation(Inflation inflation)
         {
+            Console.WriteLine("CreateInflation");
             InflationRepository < Inflation> inflationRepository = new InflationRepository<Inflation>(this.connection);
             inflation = await inflationRepository.Create(inflation);
             return inflation;

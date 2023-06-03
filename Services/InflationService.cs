@@ -20,8 +20,10 @@ namespace InflationDataServer.Services
          */
         public async Task<Inflation?> createInflation(Inflation? inflation)
         {
+            Console.WriteLine("createInflation");
+            Console.WriteLine(inflation);
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
-            InflationResponse response = new InflationResponse();
+            //InflationResponse response = new InflationResponse();
             try
             {
                 // Check if inflation is not null
@@ -31,6 +33,7 @@ namespace InflationDataServer.Services
                     unitOfWork.connect();
                     Inflation inf = await unitOfWork.CreateInflation(inflation);
                     unitOfWork.disconnect();
+                    Console.WriteLine("createInflation");
                     return inf;
                 }
                 else
