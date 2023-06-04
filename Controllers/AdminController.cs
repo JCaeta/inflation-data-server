@@ -62,7 +62,7 @@ namespace InflationDataServer.Controllers
                 if(await service.ValidatePassword(username, request.oldPassword))
                 {
                     // Change password
-                    if (await service.ChangePassword(username, request.oldPassword, request.oldPassword))
+                    if (await service.ChangePassword(username, request.password))
                     {
                         response.message.id = 1; //Succeeded
                         response.message.message = Helpers.StandardMessages[1];

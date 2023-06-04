@@ -20,15 +20,14 @@ namespace InflationDataServer.Services
             return false;
         }
 
-        public async Task<bool> ChangePassword(string username, string oldPassword, string newPassword)
+        public async Task<bool> ChangePassword(string username, string newPassword)
         {
             Admin admin = new Admin();
             admin.username = username;
-            admin.password = oldPassword;
+            admin.password = newPassword;
 
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();
-            admin.password = newPassword;
             bool result = await unitOfWork.UpdateAdminPassword(admin);
             unitOfWork.disconnect();
             return result;
