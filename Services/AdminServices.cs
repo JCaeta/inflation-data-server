@@ -55,7 +55,7 @@ namespace InflationDataServer.Services
 
             PostgreSQLUnitOfWork unitOfWork = new PostgreSQLUnitOfWork(DatabaseInformation.GetDbInfo());
             unitOfWork.connect();
-            bool result = await unitOfWork.UpdateAdminPassword(admin);
+            bool result = await unitOfWork.UpdateAdminUsername(admin);
             unitOfWork.disconnect();
             return result;
         }

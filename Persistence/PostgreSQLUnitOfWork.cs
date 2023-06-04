@@ -114,9 +114,18 @@ namespace InflationDataServer.Persistence
         public async Task<bool> UpdateAdminPassword(Admin admin)
         {
             AdminRepository<Admin> adminRepository = new AdminRepository<Admin>(this.connection);
+            UpdatePassword<Admin> strategy = new UpdatePassword<Admin>();
+            strategy.item = admin;
+            return await adminRepository.Update(strategy);
+        }
+
+        public async Task<bool> UpdateAdminUsername(Admin admin)
+        {
+            AdminRepository<Admin> adminRepository = new AdminRepository<Admin>(this.connection);
             UpdateUsername<Admin> strategy = new UpdateUsername<Admin>();
             strategy.item = admin;
             return await adminRepository.Update(strategy);
         }
+
     }
 }
