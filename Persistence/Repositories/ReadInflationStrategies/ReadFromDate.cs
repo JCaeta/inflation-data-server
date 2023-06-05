@@ -11,9 +11,6 @@ namespace InflationDataServer.Persistence.Repositories.ReadInflationStrategies
             List<Inflation> listInflation = new List<Inflation>();
 
             // 1) Execute query
-            //string query = "SELECT * FROM Inflation;";
-            Console.WriteLine("read inflation");
-            Console.WriteLine("Start date: " + StartDate);
             string query = "SELECT * FROM inflation " +
             "WHERE date >= @startDate " +
             "ORDER BY date DESC;";
