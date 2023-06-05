@@ -18,9 +18,11 @@ namespace InflationDataServer.Persistence.Repositories
         public async Task<Inflation> Create(Inflation item)
         {
             string query = "insert into inflation(date, value) values(@date, @value) returning id;";
+
             Console.WriteLine("date: " + item.date);
+            DateTimeOffset dateWithoutTimeZone = new DateTimeOffset(item.date, TimeSpan.Zero);
             NpgsqlCommand executor = new NpgsqlCommand(query, this.connection);
-            executor.Parameters.AddWithValue("@date", item.date);
+            executor.Parameters.AddWithValue("@date", dateWithoutTimeZone);
             executor.Parameters.AddWithValue("@value", item.value);
             var result = await executor.ExecuteScalarAsync();
             int id = int.Parse(result.ToString());
