@@ -37,9 +37,9 @@ namespace InflationDataServer.Services
                 float value = 1 + (inflation.value / 100);
                 Console.WriteLine("value: " + value.ToString());
                 variations *= value;
-                Console.WriteLine("variations: " + value.ToString());
+                Console.WriteLine("variations: " + variations);
                 float cumulativeInflation = (float)Math.Round((variations - 1)*100, 2);
-                Console.WriteLine("cumulativeinflation: " + value.ToString());
+                Console.WriteLine("cumulativeinflation: " + cumulativeInflation);
                 barChartData.data.Add(cumulativeInflation);
                 barChartData.labels.Add(inflation.date.ToString("MMM-yyyy"));
             }
