@@ -35,7 +35,7 @@ namespace InflationDataServer.Services
                 Inflation inflation = inflations[i];
                 float value = 1 + (inflation.value / 100);
                 variations *= value;
-                float cumulativeInflation = (float)Math.Round((variations - 1)/100, 2);
+                float cumulativeInflation = (float)Math.Round((variations - 1)*100, 2);
                 barChartData.data.Add(cumulativeInflation);
                 barChartData.labels.Add(inflation.date.ToString("MMM-yyyy"));
             }
