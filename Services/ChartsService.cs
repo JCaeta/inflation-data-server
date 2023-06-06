@@ -28,13 +28,14 @@ namespace InflationDataServer.Services
         public BarChartData setupBarChartData(List<Inflation> inflations)
         {
             BarChartData barChartData = new BarChartData();
-            float cumulativeInflation = 0;
+            float variations = 0;
 
             for (int i = inflations.Count - 1; i >= 0; i--)
             {
                 Inflation inflation = inflations[i];
-                cumulativeInflation += inflation.value;
-                cumulativeInflation = (float)Math.Round(cumulativeInflation, 2);
+                float value = 1 + (inflation.value / 100);
+                variations *= value;
+                float cumulativeInflation = (float)Math.Round((variations - 1)/100, 2);
                 barChartData.data.Add(cumulativeInflation);
                 barChartData.labels.Add(inflation.date.ToString("MMM-yyyy"));
             }
