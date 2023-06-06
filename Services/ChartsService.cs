@@ -33,9 +33,13 @@ namespace InflationDataServer.Services
             for (int i = inflations.Count - 1; i >= 0; i--)
             {
                 Inflation inflation = inflations[i];
+                Console.WriteLine("inflation.value: " + inflation.value);
                 float value = 1 + (inflation.value / 100);
+                Console.WriteLine("value: " + value.ToString());
                 variations *= value;
+                Console.WriteLine("variations: " + value.ToString());
                 float cumulativeInflation = (float)Math.Round((variations - 1)*100, 2);
+                Console.WriteLine("cumulativeinflation: " + value.ToString());
                 barChartData.data.Add(cumulativeInflation);
                 barChartData.labels.Add(inflation.date.ToString("MMM-yyyy"));
             }
