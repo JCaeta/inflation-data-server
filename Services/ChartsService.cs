@@ -28,7 +28,7 @@ namespace InflationDataServer.Services
         public BarChartData setupBarChartData(List<Inflation> inflations)
         {
             BarChartData barChartData = new BarChartData();
-            float variations = 0;
+            float variations = 1;
 
             for (int i = inflations.Count - 1; i >= 0; i--)
             {
